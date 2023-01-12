@@ -27,6 +27,12 @@ namespace Multiplayer.Smartfox
         private Dictionary<int, PlayerData> recipients = new();
 
         [SerializeField] private GameObject playerPrefab;
+        private GameObject playerObj;
+
+        public GameObject GetPlayerObject()
+        {
+            return playerObj;
+        }
 
         /**
         * <summary>
@@ -40,7 +46,8 @@ namespace Multiplayer.Smartfox
             GameObject player = Instantiate(playerPrefab);
             if (isMyself)
             {
-                player.AddComponent<PlayerController>();
+                playerObj = player;
+                playerObj.AddComponent<PlayerController>();
             }
 
             PlayerData playerData = player.AddComponent<PlayerData>();
