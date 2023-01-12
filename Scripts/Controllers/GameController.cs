@@ -12,7 +12,6 @@ using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 
 using Local.Player.Data;
-using Multiplayer.Smartfox.Network;
 
 namespace Multiplayer.Smartfox
 {
@@ -177,11 +176,15 @@ namespace Multiplayer.Smartfox
             }
         }
 
-        // Server rejected transform message - force the local player object to what server said
+        /*
+        * <summary>
+        * Server rejected transform message - force the local player object to what server said
+        * </summary>
+        */
         private void HandleNoTransform(ISFSObject dt)
         {
             int userId = dt.GetInt("id");
-            TransformHandler ntransform = TransformHandler.FromSFSObject(dt);
+            Network.TransformHandler ntransform = Network.TransformHandler.FromSFSObject(dt);
 
             if (userId == sfs.MySelf.Id)
             {

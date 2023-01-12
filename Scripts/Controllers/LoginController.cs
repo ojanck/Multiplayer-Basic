@@ -111,7 +111,7 @@ namespace Multiplayer.Smartfox
                 UdpHost = configJson.Host,
                 UdpPort = configJson.UdpPort,
                 Zone = configJson.Zone,
-                Debug = configJson.Debug
+                Debug = debug
             };
 
             // Initialize SmartFox client

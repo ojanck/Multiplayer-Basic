@@ -27,7 +27,7 @@ namespace Multiplayer.Smartfox
         private Dictionary<int, PlayerData> recipients = new();
 
         [SerializeField] private GameObject playerPrefab;
-        private GameObject playerObj;
+        [SerializeField] private GameObject playerObj;
 
         public GameObject GetPlayerObject()
         {

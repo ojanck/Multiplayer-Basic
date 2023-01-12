@@ -71,6 +71,18 @@ namespace Multiplayer.Smartfox.Network
 
         /**
         * <summary>
+        * Copies another NetworkTransform to itself
+        * </summary>
+        */
+        public void Load(TransformHandler ntransform)
+        {
+            this.position = ntransform.position;
+            this.angleRotation = ntransform.angleRotation;
+            this.timeStamp = ntransform.timeStamp;
+        }
+
+        /**
+        * <summary>
         * Check if this transform is different from given one with specified accuracy
         * </summary>
         */
@@ -109,7 +121,8 @@ namespace Multiplayer.Smartfox.Network
         * Creating NetworkTransform from SFS object
         * </summary>
         */
-        public static TransformHandler FromSFSObject(ISFSObject data) {
+        public static TransformHandler FromSFSObject(ISFSObject data)
+        {
             TransformHandler trans = new();
             ISFSObject transformData = data.GetSFSObject("transform");
 
@@ -153,6 +166,18 @@ namespace Multiplayer.Smartfox.Network
                 angleRotation = transform.localEulerAngles
             };
 
+            return trans;
+        }
+
+        /**
+        * <summary>
+        * Clone itself
+        * </summary>
+        */
+        public static TransformHandler Clone(TransformHandler ntransform)
+        {
+            TransformHandler trans = new();
+            trans.Load(ntransform);
             return trans;
         }
     }
