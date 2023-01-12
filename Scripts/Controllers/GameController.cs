@@ -12,6 +12,7 @@ using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 
 using Local.Player.Data;
+using Multiplayer.Smartfox.Network;
 
 namespace Multiplayer.Smartfox
 {
@@ -132,6 +133,9 @@ namespace Multiplayer.Smartfox
                     case "transform":
                         HandleTransform(dt);
                         break;
+                    case "notransform":
+                        HandleNoTransform(dt);
+                        break;
                     case "time":
                         HandleServerTime(dt);
                         break;
@@ -170,6 +174,20 @@ namespace Multiplayer.Smartfox
                 // Update transform of the remote user object
                 PlayerData recipient = PlayerManager.instance.GetRecipient(userId);
                 recipient?.ReceiveTransform(ntransform);
+            }
+        }
+
+        // Server rejected transform message - force the local player object to what server said
+        private void HandleNoTransform(ISFSObject dt)
+        {
+            int userId = dt.GetInt("id");
+            TransformHandler ntransform = TransformHandler.FromSFSObject(dt);
+
+            if (userId == sfs.MySelf.Id)
+            {
+                // Movement restricted!
+                // Update transform of the local object
+                ntransform.Update(PlayerManager.instance.GetPlayerObject().transform);
             }
         }
 
