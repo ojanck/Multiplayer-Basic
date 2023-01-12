@@ -1,0 +1,23 @@
+{
+  "Host": "192.168.0.68",
+  "Port": 9933,
+  "UdpHost": "192.168.0.68",
+  "UdpPort": 9933,
+  "Zone": "FPSTesting",
+  "Debug": false,
+  "HttpPort": 8080,
+  "HttpsPort": 8443,
+  "TcpNoDelay": false,
+  "BlueBox": {
+    "IsActive": true,
+    "UseHttps": false,
+    "PollingRate": 750,
+    "Proxy": {
+      "Host": null,
+      "Port": 0,
+      "BypassLocal": true,
+      "UserName": null,
+      "Password": null
+    }
+  }
+}
