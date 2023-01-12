@@ -62,7 +62,7 @@ namespace Multiplayer.Smartfox
         */
         public void OnNameInputEndEdit()
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.numpadEnterKey.wasPressedThisFrame)
                 Connect();
         }
 
