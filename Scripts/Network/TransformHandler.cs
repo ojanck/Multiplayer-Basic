@@ -71,6 +71,19 @@ namespace Multiplayer.Smartfox.Network
 
         /**
         * <summary>
+        * Check if this transform is different from given one with specified accuracy
+        * </summary>
+        */
+        public bool IsDifferent(Transform transform, float accuracy)
+        {
+            float posDif = Vector3.Distance(this.position, transform.position);
+            float angDif = Vector3.Distance(this.AngleRotation, transform.localEulerAngles);
+
+            return posDif > accuracy || angDif > accuracy;
+        }
+
+        /**
+        * <summary>
         * Stores the transform values to SFSObject to send them to server
         * </summary>
         */
@@ -111,17 +124,27 @@ namespace Multiplayer.Smartfox.Network
             trans.position = new Vector3(x, y, z);
             trans.angleRotation = new Vector3(rx, ry, rz);
 
-            if (transformData.ContainsKey("t")) {
-                trans.TimeStamp = Convert.ToDouble(transformData.GetLong("t"));
-            }
-            else {
-                trans.TimeStamp = 0;
-            }
+            trans.TimeStamp = transformData.ContainsKey("t") ? Convert.ToDouble(transformData.GetLong("t")) : 0;
 
             return trans;
         }
-	
-        // Creating NetworkTransform from Unity transform
+
+        /**
+        * <summary>
+        * Copy the Unity transform to itself
+        * </summary>
+        */
+        public void Update(Transform trans)
+        {
+            trans.position = this.Position;
+            trans.localEulerAngles = this.AngleRotation;
+        }
+
+        /**
+        * <summary>
+        * Creating NetworkTransform from Unity transform
+        * </summary>
+        */
         public static TransformHandler FromTransform(Transform transform)
         {
             TransformHandler trans = new()
